@@ -4,6 +4,7 @@ import com.mundiapolis.digital_banking.dtos.BankAccountDTO;
 import com.mundiapolis.digital_banking.dtos.CurrentBankAccountDTO;
 import com.mundiapolis.digital_banking.dtos.CustomerDTO;
 import com.mundiapolis.digital_banking.dtos.SavingBankAccountDTO;
+import com.mundiapolis.digital_banking.enums.Gender;
 import com.mundiapolis.digital_banking.exeptions.CustomerNotFoundException;
 import com.mundiapolis.digital_banking.services.BankAccountService;
 import org.springframework.boot.CommandLineRunner;
@@ -11,6 +12,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -22,10 +24,14 @@ public class DigitalBankingApplication {
     @Bean
     CommandLineRunner commandLineRunner(BankAccountService bankAccountService){
         return args -> {
-            Stream.of("Mehdi","Omar","Mohamed").forEach(name->{
+            Stream.of("Zoubair","Hamza","Khalid").forEach(name->{
                 CustomerDTO customer=new CustomerDTO();
                 customer.setName(name);
                 customer.setEmail(name+"@gmail.com");
+                customer.setDateOfBirth(new Date());
+                customer.setCity("city"+name);
+                customer.setPhoneNumber("051234567");
+                customer.setGender(Gender.MALE);
                 bankAccountService.saveCustomer(customer);
             });
             bankAccountService.listCustomers().forEach(customer->{

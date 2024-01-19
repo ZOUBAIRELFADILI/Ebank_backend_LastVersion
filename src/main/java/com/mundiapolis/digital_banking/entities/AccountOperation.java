@@ -21,9 +21,9 @@ public class AccountOperation {
     private Long id;
     private Date operationDate;
     private double amount;
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING) //String : dans Base derd Donnes pur chaque type dans enum est string
     private OperationType type;
-    @ManyToOne
+    @ManyToOne //plusieur operation pour un seule compte
     private BankAccount bankAccount;
     private String description;
 }

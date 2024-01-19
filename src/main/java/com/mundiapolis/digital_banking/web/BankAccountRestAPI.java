@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@CrossOrigin("*")
+@RestController //déclarer une classe comme un contrôleur (controller) qui gère les requêtes HTTP
+@CrossOrigin("*") // L'utilisation de l'annotation @CrossOrigin permet de spécifier quels domaines sont autorisés à accéder à l'API.
 public class BankAccountRestAPI {
     private BankAccountService bankAccountService;
 
@@ -20,7 +20,8 @@ public class BankAccountRestAPI {
     }
 
     @GetMapping("/accounts/{accountId}")
-    public BankAccountDTO getBankAccount(@PathVariable String accountId) throws BankAccountNotFoundException {
+    public BankAccountDTO getBankAccount(@PathVariable String accountId) throws BankAccountNotFoundException { //Elle est utilisée pour extraire des
+        // valeurs de variables de chemin (path variables) dans les URL
         return bankAccountService.getBankAccount(accountId);
     }
 

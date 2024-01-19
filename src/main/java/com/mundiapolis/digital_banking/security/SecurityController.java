@@ -27,7 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/auth")
 public class SecurityController {
     
-    @Autowired
+    @Autowired //injection de depandance automatique
     private AuthenticationManager authenticationManagr;
     @Autowired
     private JwtEncoder jwtEncoder;

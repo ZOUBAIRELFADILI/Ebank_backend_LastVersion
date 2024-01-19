@@ -14,7 +14,7 @@ import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "TYPE",length = 4)
+@DiscriminatorColumn(name = "TYPE",length = 4) //est utilise dans la strategy sing Table our definie le tyope de acconmete current accont or Savingacocount
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,11 +23,12 @@ public abstract class BankAccount {
     private String id;
     private double balance;
     private Date createdAt;
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING) // ORDINAL: Status dans BD  est numerated chaque type have number(CREATED = 0 , ACTIVATED = 1, SUSPENDED = 3
+    // STRING : Staus dans BD est String
     private AccountStatus status = AccountStatus.CREATED;
 
-    @ManyToOne
+    @ManyToOne //un campte concern un client : Plusieur compte pour un client
     private Customer customer;
-    @OneToMany(mappedBy = "bankAccount",fetch = FetchType.LAZY)
-    private List<AccountOperation> accountOperations;
+    @OneToMany(mappedBy = "bankAccount",fetch = FetchType.LAZY) //UN compte peut faire plusieur operation mappedBy car la relayion est biderectionelle entre Account et Operation
+    private List<AccountOperation> accountOperations; //eager: CHArge moi tous le attrinute et aussi les operation , layze: charge moi just lea attribute mais operation charge c'eat demande
 }

@@ -21,7 +21,7 @@ public class BankAccountMapperImpl {
 
     public Customer fromCustomerDTO(CustomerDTO customerDTO) {
         Customer customer = new Customer();
-        BeanUtils.copyProperties(customerDTO, customer);
+        BeanUtils.copyProperties(customerDTO, customer); //transfer or prender les attriute de customer vers customerDTO elle remplace set set set ex: customerDTO.setId(customer.getId());
         return customer;
     }
     public SavingBankAccountDTO fromSavingBankAccount(SavingAccount savingAccount){

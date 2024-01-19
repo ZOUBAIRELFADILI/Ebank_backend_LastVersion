@@ -22,8 +22,8 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-@Service
-@Transactional
+@Service //Cette annotation est utilisée pour marquer une classe en tant que service utilisé pour encapsuler la logique métier de l'application.
+@Transactional //Spring de gérer automatiquement les transactions pour les méthodes annotées
 @AllArgsConstructor
 @Slf4j
 public class BankAccountServiceImpl implements BankAccountService {
@@ -33,12 +33,12 @@ public class BankAccountServiceImpl implements BankAccountService {
     private BankAccountMapperImpl dtoMapper;
     @Override
     public CustomerDTO saveCustomer(CustomerDTO customerDTO) {
-        log.info("Saving new Customer");
+        log.info("Saving new Customer"); //@Slf4j
         Customer customer=dtoMapper.fromCustomerDTO(customerDTO);
         Customer savedCustomer = customerRepository.save(customer);
         return dtoMapper.fromCustomer(savedCustomer);
     }
-    @Override
+    @Override //Ajouter cette methode a interface
     public CurrentBankAccountDTO saveCurrentBankAccount(double initialBalance, double overDraft, Long customerId)
             throws CustomerNotFoundException {
         Customer customer=customerRepository.findById(customerId).orElse(null);
@@ -91,7 +91,7 @@ customerDTOS.add(customerDTO);
             return dtoMapper.fromCurrentBankAccount(currentAccount);
         }
     }
-    @Override
+    @Override //definie une methode que n'exist pas dans interface
     public void debit(String accountId, double amount, String description) throws BankAccountNotFoundException,
             BalanceNotSufficientException {
         BankAccount bankAccount=bankAccountRepository.findById(accountId)
